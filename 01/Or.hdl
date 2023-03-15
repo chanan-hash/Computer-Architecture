@@ -20,7 +20,6 @@ CHIP Or {
     PARTS:
     // Put your code here:
 	Not(in=a,out=temp1);
-	Nor(in=b,out=temp2);
+	Not(in=b,out=temp2);
 	Nand(a=temp1,b=temp2,out=out);
-
 }
