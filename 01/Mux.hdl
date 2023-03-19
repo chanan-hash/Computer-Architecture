@@ -19,5 +19,5 @@ Not(in=sel, out=selNot);
 And(a=a,b=selNot, out=temp1);
 And(a=b,b=sel, out=temp2);
 Or(a=temp1,b=temp2, out=out);
-
+// a*sel' + b*sel = mux
 }
