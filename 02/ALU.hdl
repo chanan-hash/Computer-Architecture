@@ -43,4 +43,38 @@ CHIP ALU {
 
     PARTS:
    // Put you code here:
+
+    // Zx, Zy --> mux for each entry, and those will be the select bit
+
+    Mux16(a=x, b[0..15]=false, sel=zx, out=isX0); // we want the second input to be all 16 bits Zero/false, if we need to reset it 
+    Mux16(a=y, b[0..15]=false, sel=zy, out=isY0);
+
+    //Nx, Ny --> mux for each entry, and those will be the select bit
+    // we need also a not gate before
+    Not16(in=isX0, out=NisX0);
+    Not16(in=isY0, out=NisY0);
+
+    Mux16(a=isX0, b=NisX0, sel=nx, out=finX);
+    Mux16(a=isY0, b=NisY0, sel=ny, out=finY);
+
+    // f for select which function to operate --> And16 for 0, Add16 for 1
+    And16(a=finX, b=finY, out=xAndy);
+    Add16(a=finX, b=finY, out=xPlusY);
+
+    // decide which if the functio to put out
+    Mux16(a=xAndy, b=xPlusY, sel=f, out=finOut); // a = 0, b = 1 --> the center of the ALU
+
+
+    // No, before sending out the out put we need to decide if to put it in Not gate
+    // To know if the number is negative, we will look at thw Msb, and see if it One, because in 2's-c, is the Msb is 1, so it is a negative number
+    Not16(in=finOut, out=finNot);
+    Mux16(a=finOut, b=finNot, sel=no, out=out, out[15]=ng); // The final output of the ALU, we are also connecting the 16'th bit(out[15]), to the ng output
+
+    // There are still two more outputs, Zr, ng
+    // for Zr we need to do or between all the 16 bit but to a One or gate, not like th or16
+    Or8Way(in=out[0..7], out=temp1); // wiring the first 8 pins of the out to an 8-or gate
+    Or8Way(in=out[8..15], out=temp2); // wiring the first 8 pins of the out to an 8-or gate
+    Or(a=temp1, b=temp2, out=outtmp12);
+    Not(in=outtmp12, out=zr); // if we got One from the Or gates, means the number is not Zero, so we want to take out 0, and not 1
+                             // so we will take the output to a not gate adn wiring out to 'zr'
 }
