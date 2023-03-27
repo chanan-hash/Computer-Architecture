@@ -68,12 +68,12 @@ CHIP ALU {
     // No, before sending out the out put we need to decide if to put it in Not gate
     // To know if the number is negative, we will look at thw Msb, and see if it One, because in 2's-c, is the Msb is 1, so it is a negative number
     Not16(in=finOut, out=finNot);
-    Mux16(a=finOut, b=finNot, sel=no, out=out, out[15]=ng); // The final output of the ALU, we are also connecting the 16'th bit(out[15]), to the ng output
+    Mux16(a=finOut, b=finNot, sel=no, out=out, out[15]=ng, out[0..7]=Zr1, out[8..15]=Zr2); // The final output of the ALU, we are also connecting the 16'th bit(out[15]), to the ng output
 
     // There are still two more outputs, Zr, ng
     // for Zr we need to do or between all the 16 bit but to a One or gate, not like th or16
-    Or8Way(in=out[0..7], out=temp1); // wiring the first 8 pins of the out to an 8-or gate
-    Or8Way(in=out[8..15], out=temp2); // wiring the first 8 pins of the out to an 8-or gate
+    Or8Way(in=Zr1, out=temp1); // wiring the first 8 pins of the out to an 8-or gate
+    Or8Way(in=Zr2, out=temp2); // wiring the first 8 pins of the out to an 8-or gate
     Or(a=temp1, b=temp2, out=outtmp12);
     Not(in=outtmp12, out=zr); // if we got One from the Or gates, means the number is not Zero, so we want to take out 0, and not 1
                              // so we will take the output to a not gate adn wiring out to 'zr'

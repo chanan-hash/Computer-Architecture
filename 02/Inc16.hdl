@@ -17,6 +17,6 @@ CHIP Inc16 {
    Add16(a=in[0..15], b[0]=true,b[1..15] = false, out=out[0..15]); 
    // true is like to add 1
    // Can also be writen like this, without the [0..15], only geting the variable name, and it takes it all
-   // Add16(a=in, b[0]=true, out=out); 
+   // Add16(a=in, b[0]=true, b[1..5]=false, out=out); // It is always good to initial al wires
 
 }
