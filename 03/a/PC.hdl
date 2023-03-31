@@ -1,0 +1,37 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/PC.hdl
+
+/**
+ * A 16-bit counter with load and reset control bits.
+ * if      (reset[t] == 1) out[t+1] = 0
+ * else if (load[t] == 1)  out[t+1] = in[t]
+ * else if (inc[t] == 1)   out[t+1] = out[t] + 1  (integer addition)
+ * else                    out[t+1] = out[t]
+ */
+
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    // Put your code here:
+    // if == mux
+    // else if --> if the mux didn't chose so choose simthing else
+    Mux8Way16(a=memory, b=memAfterInc, c=in, d=in, e=false, f=false, g=false, h=false, sel[0]=inc,sel[1]=load,sel[2]=reset, out=outToRegister);
+    Register(in=outToRegister, load=true, out=memory, out=out);
+    // here we have 7 mux16 so to less efficient, we can built it with only 3 mux16 so it more efficiemt, but you can confuse and wiring
+    // it was a question in the test last semester
+    Inc16(in=memory, out=memAfterInc);    
+    // if we are changing the oreder of the selctor we need to change the order of the in
+
+
+    // second way
+    /*
+Mux16(a=memory, b=memAfterInc, sel=inc, out=afterInc);
+Mux16(a=afterInc, b=in, sel=load, out=afterLoad);
+Mux16(a=afterLoad, b=false, sel=reset, out=toRegister);
+
+*/
+}

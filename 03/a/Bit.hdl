@@ -1,0 +1,25 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/03/a/Bit.hdl
+
+/**
+ * 1-bit register:
+ * If load[t] == 1 then out[t+1] = in[t]
+ *                 else out does not change (out[t+1] = out[t])
+ */
+
+CHIP Bit {
+    IN in, load;
+    OUT out;
+
+    PARTS:
+    // Put your code here:
+    // what that I will do in this current time clock, will go out in the next time clock.
+    // if the time clock is 0, so we will take out what that were know 
+    Mux(a=outmemory, b=in, sel=load, out=outmux);
+    // in --> will be the 1 input in the mux, that if load/clock that is the selector is 1, it will take the new information    
+    // if clock is 0, so we will take the out from the last cycle and out it again, means the data is the same and didn't change
+    DFF(in=outmux, out=out, out=outmemory); // dividing the out in to two, we want another wire from out to go in the mux, and that how we've built sequential logic 
+    // D-FF is biult from 5 Nand gates
+}
