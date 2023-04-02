@@ -15,7 +15,7 @@ CHIP Register {
 
     PARTS:
     // Put your code here:
-    // work the same as bit, but for 16 bits. it keep/save the data of a 16 bit input, so we'll need 16 Bits gates for if
+    // work the same as bit, but for 16 bits. it keep/save the data of a 16 bit input, so we'll need 16 Bits chips for if
 Bit(in=in[0], load=load, out=out[0]);
 Bit(in=in[1], load=load, out=out[1]);
 Bit(in=in[2], load=load, out=out[2]);

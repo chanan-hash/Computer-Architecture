@@ -18,20 +18,29 @@ CHIP PC {
     PARTS:
     // Put your code here:
     // if == mux
-    // else if --> if the mux didn't chose so choose simthing else
-    Mux8Way16(a=memory, b=memAfterInc, c=in, d=in, e=false, f=false, g=false, h=false, sel[0]=inc,sel[1]=load,sel[2]=reset, out=outToRegister);
-    Register(in=outToRegister, load=true, out=memory, out=out);
-    // here we have 7 mux16 so to less efficient, we can built it with only 3 mux16 so it more efficiemt, but you can confuse and wiring
-    // it was a question in the test last semester
-    Inc16(in=memory, out=memAfterInc);    
-    // if we are changing the oreder of the selctor we need to change the order of the in
+    // else if --> if the mux didn't chose so choose something else
+//     Mux8Way16(a=memory, b=memAfterInc, c=in, d=in, e=false, f=false, g=false, h=false, sel[0]=inc,sel[1]=load,sel[2]=reset, out=outToRegister);
+//     Register(in=outToRegister, load=true, out=memory, out=out);
+//     // here we have 7 mux16 so to less efficient, we can built it with only 3 mux16 so it more efficiemt, but you can confuse and wiring
+//     // it was a question in the test last semester
+//     Inc16(in=memory, out=memAfterInc);    
+//     // if we are changing the oreder of the selctor we need to change the order of the in
 
 
-    // second way
-    /*
-Mux16(a=memory, b=memAfterInc, sel=inc, out=afterInc);
-Mux16(a=afterInc, b=in, sel=load, out=afterLoad);
-Mux16(a=afterLoad, b=false, sel=reset, out=toRegister);
+//     // second way
+//     /*
+// Mux16(a=memory, b=memAfterInc, sel=inc, out=afterInc);
+// Mux16(a=afterInc, b=in, sel=load, out=afterLoad);
+// Mux16(a=afterLoad, b=false, sel=reset, out=toRegister);
 
-*/
+// */
+
+Register(in=resMuxOut, load=true, out=out, out=regsOut);
+Inc16(in=regsOut, out=incOut); // starting from one, and keep tracking it to build
+                
+                //b[0..15]=false,
+Mux16(a=loadMuxOut, b=false, sel=reset, out=resMuxOut); // reset mux
+Mux16(a=incMuxOut, b=in, sel=load, out=loadMuxOut); // load mux
+Mux16(a=regsOut, b=incOut, sel=inc, out=incMuxOut); // inc mux
+
 }
