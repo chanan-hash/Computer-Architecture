@@ -16,4 +16,20 @@ CHIP RAM512 {
 
     PARTS:
     // Put your code here:
+    // work the same as Ram64, but here instead of 8 Ram8 wil have 8 Ram64,
+    // and the sel will be the last three address wires ads[3..8] --> lsb,
+    // they will go into each RAM8, and select inside which register to go
+    // ads[0..2] will select which of the 8 RAM8 to go into --> msb  
+    DMux8Way(in=load, sel=address[0..2], a=a1, b=b2, c=c3, d=d4, e=e5, f=f6, g=g7, h=h8);
+  
+    RAM64(in=in, load=a1, address=address[3..8], out=A1);
+    RAM64(in=in, load=b2, address=address[3..8], out=B2);
+    RAM64(in=in, load=c3, address=address[3..8], out=C3);
+    RAM64(in=in, load=d4, address=address[3..8], out=D4);
+    RAM64(in=in, load=e5, address=address[3..8], out=E5);
+    RAM64(in=in, load=f6, address=address[3..8], out=F6);
+    RAM64(in=in, load=g7, address=address[3..8], out=G7);
+    RAM64(in=in, load=h8, address=address[3..8], out=H8);
+    
+    Mux8Way16(a=A1, b=B2, c=C3, d=D4, e=E5, f=F6, g=G7, h=H8, sel=address[0..2], out=out);
 }

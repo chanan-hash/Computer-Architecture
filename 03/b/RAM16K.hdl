@@ -16,4 +16,18 @@ CHIP RAM16K {
 
     PARTS:
     // Put your code here:
+     // work the same as RAM-4k, but here instead of 8 Ram512 wil have 4!!!!(and not 8. 4x4=16) RAM-4k,
+    // and the sel will be the last three address wires ads[2..13]!!!! --> lsb,
+    // they will go into each RAM8, and select inside which register to go
+    // ads[0..1]!!!! will select which of the 8 RAM8 to go into --> msb  
+    
+    DMux4Way(in=load, sel=address[0..1], a=a1, b=b2, c=c3, d=d4);
+  
+    RAM4K(in=in, load=a1, address=address[2..13], out=A1);
+    RAM4K(in=in, load=b2, address=address[2..13], out=B2);
+    RAM4K(in=in, load=c3, address=address[2..13], out=C3);
+    RAM4K(in=in, load=d4, address=address[2..13], out=D4);
+    
+    Mux4Way16(a=A1, b=B2, c=C3, d=D4, sel=address[0..1], out=out);
+
 }
