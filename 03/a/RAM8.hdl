@@ -29,7 +29,23 @@ CHIP RAM8 {
 
     // Mux8Way16(a=A, b=B, c=C, d=D, e=E, f=F, g=G, h=H, sel=address, out=out);
 
+    // every one of htem will take the in
 
-
+    // Two decisions:
+    // 1.  where does the in value goes
+    // 2.  which register does the out values
     
+    DMux8Way(in=load, sel=address, a=a1, b=b2, c=c3, d=d4, e=e5, f=f6, g=g7, h=h8);
+    
+    Register(in=in, load=a1, out=A1);
+    Register(in=in, load=b2, out=B2);
+    Register(in=in, load=c3, out=C3);
+    Register(in=in, load=d4, out=D4);
+    Register(in=in, load=e5, out=E5);
+    Register(in=in, load=f6, out=F6);
+    Register(in=in, load=g7, out=G7);
+    Register(in=in, load=h8, out=H8);
+
+    Mux8Way16(a=A1, b=B2, c=C3, d=D4, e=E5, f=F6, g=G7, h=H8, sel=address, out=out);
+
 }
