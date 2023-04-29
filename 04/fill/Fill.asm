@@ -15,65 +15,65 @@
 //Listening if the key is pressed
 (PRESSED)
     @SCREEN
-    D=A
+    D=A // D = Screen adress
 
     @i
-    M=D
+    M=D // M = Screen adress 16384, the loop will strt from i = 16384
 
     @KBD
-    D=M
+    D=M     // KBD = 24576, D=16384
 
-    @FILL
+    @FILL // got to fill register and jump if D is greater than 0 D > 0
     D;JGT
 
-    @PRESSED
+    @PRESSED // if you got here go back to pressed, unconditional jump
     0;JMP
 
 (STOP_PRESS)
-    @SCREEN
+    @SCREEN // keep in D screen address D = 16384
     D=A
 
     @i
-    M=D
+    M=D  // M = Screen adress 16384, the loop will strt from i = 16384
 
     @KBD
-    D=M
+    D=M // KBD = 24576, D = 16384 = M
 
     @CLEAR_SCREEN
-    D;JEQ
+    D;JEQ     // go to clearScreen id D == 0
 
-    @STOP_PRESS
+    @STOP_PRESS // if you got here go back to stop press
     0;JMP
 
 
 (FILL)
     (BLACK)
     @i
-    A=M
+    A=M // A The ram address wil be equal to what is in M, in the beginning is 16384, because now M = 16834, grom line 40
     M=-1 // this is how we color in black, because of the Two's complement
 
     @i
-    M=M+1
+    M=M+1 // i++ -1 + 1 = 0
 
     @KBD
-    D=A
+    D=A // D = 24576
     @i
-    D=D-M
+    D=D-M // D = 24576 - 1 ?
 
     @BLACK
-    D;JGT
+    D;JGT // jumpt o black if D > 0
 
-@STOP_PRESS
+@STOP_PRESS // if we got hehre means we've stopped pressing
 0;JMP
 
 (CLEAR_SCREEN)
     (WHITE)
         @i
-        A=M
+        A=M 
         M=0 // means white
 
         @i
-        M=M+1
+        M=M+1 // i++
 
         @KBD
         D=A
