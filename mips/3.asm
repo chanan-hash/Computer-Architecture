@@ -1,22 +1,23 @@
-# init address a[0] = 1, a[1] =3, a[3] =5 .....
-# for i in 30:
-#   a[i] = i+2-1 
-# $s0 = base address , $t1 = i, #$t2 = 29
-# 10011020
-lui $s0 0x1001 
-ori $s0, $s0 0x1020
+# init:
+# $t0 = addr
+# $t1 = n (init to 1)
+# $t2 = end (init to 29)
 
-li $t1, 1 # the valuse to add
-li $t2, 30
-li $t3, 0
-li $t5 ,0 # i
-loop: 
-	slt $t3 ,$t1, $t2
-	beq $t3, $0, done
-	addiu $t4, $t4, 4   # mult by 4, to the adressers
-	add $s0, $s0, $t4 # address progress
-	sw  $t1, 0($s0)   # saving the valuse in the ofset of thr address, inserting to cell $s0 + 0 
-	addi $t1,$0, 2
-	addi $t5 ,$0, 1 
-	j loop
+# $t0 = 0x10011020
+lui $t0, 0x1001
+ori $t0, 0x1020
+
+addi		$t1, $0, 1		# $t1 = 1
+addi		$t2, $0, 29		# $t2 = 29
+
+loop:
+    bgt		$t1, $t2, done	# if $t1 > $t2 then goto done
+    # save n into the address
+    sw		$t1, 0($t0)		    # $t0 = $t1
+    # progress of the address
+    addi		$t0, $t0, 4		# $t0 = $t0 + 4
+    # n+=2
+    addi	$t1, $t1, 2			# $t1 = $t1 + 2
+
+    j		loop				# jump to loop
 done:
