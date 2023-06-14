@@ -15,7 +15,7 @@ loop:
     # save n into the address
     sw		$t1, 0($t0)		    # $t0 = $t1
     # progress of the address
-    addi		$t0, $t0, 4		# $t0 = $t0 + 4
+    addi	$t0, $t0, 4		# $t0 = $t0 + 4
     # n+=2
     addi	$t1, $t1, 2			# $t1 = $t1 + 2
 
