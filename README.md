@@ -18,16 +18,21 @@ The **Computer Architecture** repository provides a collection of implementation
 ## Projects
 
 The repository includes the following projects:
-1-6 are for and building computer hardware: 
-1. **Project 1:** Hack CPU Implementation - An implementation of the Hack central processing unit (CPU) using Hack assembly language. This project focuses on building a functional CPU that can execute Hack machine language instructions.
+1-6 are for and building computer hardware from nand2tetris course:
+1. **Project 1:** Building Logic gates CHIPS - An implementation in hdl language for the logic gates that will helps us in after it when building the coputer
 
-2. **Project 2:** Hack Assembler - An assembler for the Hack assembly language. This project translates Hack assembly code into binary machine code that can be executed on the Hack CPU.
+2. **Project 2:** ALU - building the coputing and calculating CHIPS, such as ALU, H.A. F.A. and Incrementer.
 
-3. **Project 3:** Hack Virtual Machine Translator - A translator for the Hack Virtual Machine (VM) language. This project converts VM code, which is a higher-level language, into Hack assembly code that can be executed on the Hack CPU.
+3. **Project 3:** RAM - An Implementation for RAM parts in hdl language.
 
-4. **Project 4:** MIPS Assembler - An assembler for the MIPS assembly language. This project translates MIPS assembly code into binary machine code that can be executed on a MIPS-based computer architecture.
+4. **Project 4:** Hack Hack assembly language - in this project we are writing in Hack assembly laguage for the Hack copumter. 
 
-5. **Project 5:** MIPS Simulator - A simulator for the MIPS computer architecture. This project allows you to simulate the execution of MIPS assembly code and observe the behavior of the MIPS CPU and memory.
+5. **Project 5:** Hack CPU Implementation - An implementation of the Hack central processing unit (CPU) using Hack assembly language. This project focuses on building a functional CPU that can execute Hack machine language instructions.
+
+6. **Project 6:** Hack Assembler - An assembler for the Hack assembly language. This project translates Hack assembly code into binary machine code that can be executed on the Hack CPU.
+
+7. **Project 4:** MIPS Assembler - An assembler for the MIPS assembly language. This project translates MIPS assembly code into binary machine code that can be executed on a MIPS-based computer architecture.
+                  MIPS Simulator - A simulator for the MIPS computer architecture. This project allows you to simulate the execution of MIPS assembly code and observe the behavior of the MIPS CPU and memory.
 
 ## Getting Started
 
@@ -52,7 +57,7 @@ Contributions to this repository are welcome! If you find a bug, have a suggesti
 
 ## License
 
-This repository is licensed under the [MIT License](LICENSE). You are free to use, modify, and distribute the code within the terms and conditions of the license.
+This repository is licensed under the (LICENSE). You are free to use, modify, and distribute the code within the terms and conditions of the license.
 
 Please note that while this repository aims to provide useful implementations and projects, it is always important to reference the original course materials and respect any licensing or attribution requirements associated with the nand2tetris course or any other relevant sources.
 
