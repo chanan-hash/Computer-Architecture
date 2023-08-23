@@ -49,16 +49,18 @@
 (FILL)
     (BLACK)
     @i
-    A=M // A The ram address wil be equal to what is in M, in the beginning is 16384, because now M = 16834, grom line 40
+    A=M // A The Ram address wil be equal to what is in M, in the beginning is 16384, because now M = 16834, from line 40
+        // going to address that at A, and changing is value at M, to -1, so color it at black.
+        // It is not changing @i, we are just getting the address from it, like Array in assembly of hack. 
     M=-1 // this is how we color in black, because of the Two's complement
 
     @i
-    M=M+1 // i++ -1 + 1 = 0
+    M=M+1 // i++ 16384+1, 16384+2, 16384+3, 16384+4...KBD
 
     @KBD
     D=A // D = 24576
     @i
-    D=D-M // D = 24576 - 1 ?
+    D=D-M // D = 24576 - i 
 
     @BLACK
     D;JGT // jumpt o black if D > 0
